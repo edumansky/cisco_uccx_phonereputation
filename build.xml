@@ -1,0 +1,83 @@
+<project name="whitepagespro-api" basedir="." default="jar">
+
+	<property name="version"	 value="1.0"/>
+
+	<property name="src.dir"     value="src/main/java"/>
+	<property name="build.dir"   value="target/build"/>
+	<property name="classes.dir" value="${build.dir}/classes"/>
+	<property name="jar.dir"     value="${build.dir}/jar"/>
+	<property name="lib.dir"     value="lib"/>
+
+	<path id="classpath">
+		<fileset dir="${lib.dir}" includes="**/*.jar"/>
+	</path>
+
+	<target name="clean">
+		<delete dir="${build.dir}"/>
+	</target>
+
+	<target name="compile">
+		<mkdir dir="${classes.dir}"/>
+		<javac srcdir="${src.dir}" destdir="${classes.dir}" 
+			source="1.6" target="1.6" 
+			debug="on"
+			includeantruntime="false">
+			
+			<classpath refid="classpath" />
+		</javac>
+	</target>
+	
+	<target name="compile-5">
+			<mkdir dir="${classes.dir}"/>
+			<javac srcdir="${src.dir}" destdir="${classes.dir}" 
+				source="1.5" target="1.5" 
+				debug="on"
+				includeantruntime="false">
+				
+				<classpath refid="classpath" />
+			</javac>
+		</target>
+	
+	<target name="uccx-jar" depends="clean,compile">
+		<jar destfile="${build.dir}/${ant.project.name}-uccx-${version}.jar">
+			<fileset dir="${classes.dir}" includes="**/JsonMap*.class"/>
+			<fileset dir="${classes.dir}" includes="**/SimpleHttpClient*.class"/>
+			<fileset dir="${classes.dir}" includes="**/WhitepagesProIvrApi*.class"/>
+			<fileset dir="${classes.dir}" includes="WhitepagesProApi*.class"/>
+		</jar>
+	</target>
+	
+	<target name="cvp-jar" depends="clean,compile">
+		<jar destfile="${build.dir}/${ant.project.name}-cvp-${version}.jar">
+			<fileset dir="${classes.dir}" includes="**/JsonMap*.class"/>
+			<fileset dir="${classes.dir}" includes="**/SimpleHttpClient*.class"/>
+			<fileset dir="${classes.dir}" includes="**/WhitepagesProIvrApi*.class"/>
+			<fileset dir="${classes.dir}" includes="**/WhitepagesProApi*.class"/>
+		</jar>
+	</target>
+	
+	<target name="uccx-jar-5" depends="clean,compile-5">
+		<jar destfile="${build.dir}/${ant.project.name}-uccx-${version}.jar">
+			<fileset dir="${classes.dir}" includes="**/JsonMap*.class"/>
+			<fileset dir="${classes.dir}" includes="**/SimpleHttpClient*.class"/>
+			<fileset dir="${classes.dir}" includes="**/WhitepagesProIvrApi*.class"/>
+			<fileset dir="${classes.dir}" includes="WhitepagesProApi*.class"/>
+		</jar>
+	</target>
+	
+	<target name="cvp-jar-5" depends="clean,compile-5">
+		<jar destfile="${build.dir}/${ant.project.name}-cvp-${version}.jar">
+			<fileset dir="${classes.dir}" includes="**/JsonMap*.class"/>
+			<fileset dir="${classes.dir}" includes="**/SimpleHttpClient*.class"/>
+			<fileset dir="${classes.dir}" includes="**/WhitepagesProIvrApi*.class"/>
+			<fileset dir="${classes.dir}" includes="**/WhitepagesProApi*.class"/>
+		</jar>
+	</target>
+
+	<target name="jar" depends="compile">
+		<jar destfile="${build.dir}/${ant.project.name}.jar" basedir="${classes.dir}"/>
+	</target>
+
+	<target name="clean-build" depends="clean,jar"/>
+
+</project>
