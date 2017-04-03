@@ -1,8 +1,10 @@
 
+import java.util.HashMap;
+
 import com.whitepages.ivr.WhitepagesProIvrApi;
 
 /***
- * A simple API used to lookup the spam score for a given phone number,
+ * A simple API used to lookup information for a given phone number,
  * for use with Cisco UCCX. This is in the default package for convenient use 
  * from Cisco UCCX, since the UCCX editor does not allow importing fully 
  * qualified package names.
@@ -12,7 +14,7 @@ public class WhitepagesProApi {
     private WhitepagesProIvrApi api;
     
     /***
-     * Static version of spam lookup used for even more convenient usage
+     * Static version of spam lookup used for more convenient usage
      * from UCCX. Doesn't allow retrieving previous errors though.
      * 
      * @param phone
@@ -22,6 +24,19 @@ public class WhitepagesProApi {
     public static int lookupSpamScore(String phone, String apiKey) {
     	WhitepagesProIvrApi proApi = new WhitepagesProIvrApi(apiKey);
     	return proApi.lookupSpamScore(phone);
+    }
+    
+    /***
+     * Static version of reverse phone lookup used for more convenient usage
+     * from UCCX. Doesn't allow retrieving previous errors though.
+     * 
+     * @param phone
+     * @param apiKey
+     * @return
+     */
+    public static HashMap<String, Object> reversePhoneLookup(String phone, String apiKey) {
+    	WhitepagesProIvrApi proApi = new WhitepagesProIvrApi(apiKey);
+    	return proApi.reversePhoneLookup(phone);
     }
     
     /***
@@ -49,6 +64,15 @@ public class WhitepagesProApi {
      */
     public int lookupSpamScore(String phone) {
     	return api.lookupSpamScore(phone);
+    }
+    
+    /***
+     * Perform reverse phone lookup for the given number.
+     * 
+     * @param apiKey
+     */
+    public HashMap<String, Object> reversePhoneLookup(String phone) {
+    	return api.reversePhoneLookup(phone);
     }
     
     /***

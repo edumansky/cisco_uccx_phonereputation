@@ -44,8 +44,14 @@ public class JsonMap {
 		if (element instanceof String) {
 			values.put(baseKey + "." + key, element.toString());
 	    }
+	    else if (element instanceof Double) {
+	    	values.put(baseKey + "." + key, ((Double) element).doubleValue());
+	    }
+	    else if (element instanceof Float) {
+	    	values.put(baseKey + "." + key, ((Float) element).floatValue());
+	    }
 	    else if (element instanceof Number) {
-	    	values.put(baseKey + "." + key, element.toString());
+	    	values.put(baseKey + "." + key, ((Number) element).intValue());
 	    }
 	    else if (element instanceof Boolean) {
 	    	values.put(baseKey + "." + key, element.toString());
