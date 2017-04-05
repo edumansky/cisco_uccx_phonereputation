@@ -25,9 +25,29 @@ public class WhitepagesApiTest {
 	}
 	
 	@Test
+	public void staticWhitepagesSpamLookupTest() {
+		int reputation = WhitepagesProApi.lookupSpamScore(TEST_NUMBER_1, TestConfig.get("api_key"));
+
+		Assert.assertEquals(1, reputation);
+	}
+	
+	@Test
 	public void whitepagesReverseLookupTest() {
 		WhitepagesProApi api = new WhitepagesProApi(TestConfig.get("api_key"));
 		HashMap<String, Object> results = api.reversePhoneLookup(TEST_NUMBER_1);
+
+		String belongsTo = (String)results.get("whitepages.belongs_to[0].name");
+		double latitude = (Double)results.get("whitepages.current_addresses[0].lat_long.latitude");
+		double longitude = (Double)results.get("whitepages.current_addresses[0].lat_long.longitude");
+		
+		Assert.assertEquals("Pizza Hut", belongsTo);
+		Assert.assertEquals(30.271917, latitude, 0.000001);
+		Assert.assertEquals(-97.698326, longitude, 0.000001);
+	}
+	
+	@Test
+	public void staticWhitepagesReverseLookupTest() {
+		HashMap<String, Object> results = WhitepagesProApi.reversePhoneLookup(TEST_NUMBER_1, TestConfig.get("api_key"));
 
 		String belongsTo = (String)results.get("whitepages.belongs_to[0].name");
 		double latitude = (Double)results.get("whitepages.current_addresses[0].lat_long.latitude");

@@ -5,8 +5,8 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.util.HashMap;
 
-import org.json.JSONObject;
 
+import com.whitepages.ivr.json.JSONObject;
 import com.whitepages.ivr.rest.JsonMap;
 import com.whitepages.ivr.rest.SimpleHttpClient;
 import com.whitepages.ivr.rest.SimpleHttpClient.Response;

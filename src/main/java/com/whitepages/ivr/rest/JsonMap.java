@@ -2,8 +2,8 @@ package com.whitepages.ivr.rest;
 
 import java.util.HashMap;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import com.whitepages.ivr.json.JSONArray;
+import com.whitepages.ivr.json.JSONObject;
 
 /***
  * Represents a JSON object as a map of key/value pairs.
